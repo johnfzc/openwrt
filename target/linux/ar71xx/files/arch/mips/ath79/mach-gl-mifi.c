@@ -27,7 +27,7 @@
 #define GL_MIFI_GPIO_LED_LAN		16
 #define GL_MIFI_GPIO_LED_WLAN		1
 #define GL_MIFI_GPIO_LED_NET		0
-#define GL_MIFI_GPIO_LED_3GCONTROL	7
+#define GL_MIFI_GPIO_PCIE_POWER  	7
 
 #define GL_MIFI_GPIO_BTN_RESET    11
 
@@ -60,11 +60,6 @@ static struct gpio_led gl_mifi_leds_gpio[] __initdata = {
 		.gpio = GL_MIFI_GPIO_LED_NET,
 		.active_low = 0,
 	},
-	{
-		.name = "gl-mifi:green:3gcontrol",
-		.gpio = GL_MIFI_GPIO_LED_3GCONTROL,
-		.active_low = 0,
-	}
 };
 
 static struct gpio_keys_button gl_mifi_gpio_keys[] __initdata = {
@@ -106,6 +101,9 @@ static void __init gl_mifi_setup(void)
 	ath79_register_mdio(0, 0x0);
 	ath79_register_eth(0);
 	ath79_register_eth(1);
+	gpio_request_one(GL_MIFI_GPIO_PCIE_POWER,
+                         GPIOF_OUT_INIT_HIGH | GPIOF_EXPORT_DIR_FIXED,
+                         "PCIE power");
 
 	/* register wireless mac with cal data */
 	ath79_register_wmac(art + GL_MIFI_CALDATA_OFFSET, art + GL_MIFI_WMAC_MAC_OFFSET);
