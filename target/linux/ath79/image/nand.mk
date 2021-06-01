@@ -77,6 +77,69 @@ define Device/domywifi_dw33d
 endef
 TARGET_DEVICES += domywifi_dw33d
 
+define Device/glinet_gl-x300b-nor
+  SOC := qca9531
+  DEVICE_TITLE := GL.iNet GL-X300B (NOR)
+  DEVICE_PACKAGES := kmod-usb2 block-mount
+  IMAGE_SIZE := 16000k
+  SUPPORTED_DEVICES += gl-x300b glinet,gl-x300b
+endef
+TARGET_DEVICES += glinet_gl-x300b-nor
+
+define Device/glinet_gl-x300b-nor-nand
+  SOC := qca9531
+  DEVICE_TITLE := GL.iNet GL-X300B (NOR/NAND)
+  DEVICE_PACKAGES := kmod-usb2 block-mount
+  KERNEL_SIZE := 2048k
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  VID_HDR_OFFSET := 2048
+  IMAGES := factory.img sysupgrade.tar
+  IMAGE/sysupgrade.tar := sysupgrade-tar-compat-1806 | append-metadata
+  IMAGE/factory.img := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | append-metadata
+  SUPPORTED_DEVICES += gl-x300b glinet,gl-x300b
+endef
+TARGET_DEVICES += glinet_gl-x300b-nor-nand
+
+define Device/glinet_gl-xe300-nor
+  SOC := qca9531
+  DEVICE_TITLE := GL.iNet GL-XE300 (NOR)
+  DEVICE_PACKAGES := kmod-usb2 block-mount  kmod-usb-serial-ch341
+  IMAGE_SIZE := 16000k
+  SUPPORTED_DEVICES += gl-xe300 glinet,gl-xe300
+endef
+TARGET_DEVICES += glinet_gl-xe300-nor
+
+define Device/glinet_gl-xe300-nor-nand
+  SOC := qca9531
+  DEVICE_TITLE := GL.iNet GL-XE300 (NOR/NAND)
+  DEVICE_PACKAGES := kmod-usb2 block-mount kmod-usb-serial-ch341
+  KERNEL_SIZE := 2048k
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  VID_HDR_OFFSET := 2048
+  IMAGES := factory.img sysupgrade.tar
+  IMAGE/sysupgrade.tar := sysupgrade-tar-compat-1806 | append-metadata
+  IMAGE/factory.img := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | append-metadata
+  SUPPORTED_DEVICES += gl-xe300 glinet,gl-xe300
+endef
+TARGET_DEVICES += glinet_gl-xe300-nor-nand
+
+define Device/glinet_gl-xe300-iot
+  SOC := qca9531
+  DEVICE_TITLE := GL.iNet GL-XE300 (NOR/NAND IOT)
+  DEVICE_PACKAGES := kmod-usb2 block-mount kmod-usb-serial-ch341
+  KERNEL_SIZE := 2048k
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  VID_HDR_OFFSET := 2048
+  IMAGES := factory.img sysupgrade.tar
+  IMAGE/sysupgrade.tar := sysupgrade-tar-compat-1806 | append-metadata
+  IMAGE/factory.img := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | append-metadata
+  SUPPORTED_DEVICES += gl-xe300 glinet,gl-xe300
+endef
+TARGET_DEVICES += glinet_gl-xe300-iot
+
 define Device/glinet_gl-ar300m-common-nand
   SOC := qca9531
   DEVICE_VENDOR := GL.iNet
