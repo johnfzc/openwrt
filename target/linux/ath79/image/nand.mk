@@ -82,7 +82,13 @@ define Device/glinet_gl-x300b-nor
   DEVICE_TITLE := GL.iNet GL-X300B (NOR)
   DEVICE_PACKAGES := kmod-usb2 block-mount
   IMAGE_SIZE := 16000k
+  KERNEL_SIZE := 2304k
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
   SUPPORTED_DEVICES += gl-x300b glinet,gl-x300b
+  IMAGES := factory.img sysupgrade.tar
+  IMAGE/factory.img := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | append-metadata
+  IMAGE/sysupgrade.tar := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += glinet_gl-x300b-nor
 
@@ -91,7 +97,13 @@ define Device/glinet_gl-xe300-nor
   DEVICE_TITLE := GL.iNet GL-XE300 (NOR)
   DEVICE_PACKAGES := kmod-usb2 block-mount  kmod-usb-serial-ch341
   IMAGE_SIZE := 16000k
+  KERNEL_SIZE := 2304k
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
   SUPPORTED_DEVICES += gl-xe300 glinet,gl-xe300
+  IMAGES := factory.img sysupgrade.tar
+  IMAGE/factory.img := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | append-metadata
+  IMAGE/sysupgrade.tar := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += glinet_gl-xe300-nor
 
